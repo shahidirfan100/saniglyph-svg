@@ -1,0 +1,22 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "saniglyph-svg/inline-svg",
+  "version": "1.1.5",
+  "title": "Inline SVG",
+  "category": "media",
+  "icon": "format-image",
+  "description": "Render a sanitized SVG attachment inline.",
+  "textdomain": "saniglyph-svg",
+  "attributes": {
+    "attachmentId": { "type": "number", "default": 0 },
+    "mediaUrl": { "type": "string", "default": "" },
+    "width": { "type": "string", "default": "" },
+    "height": { "type": "string", "default": "" }
+  },
+  "supports": {
+    "html": false
+  },
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./editor.css"
+}

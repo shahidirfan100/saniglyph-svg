@@ -1,0 +1,49 @@
+SaniGlyph SVG changelog
+
+1.1.5
+- Reworked the dashboard logo for clear rendering at WordPress admin sizes.
+- Simplified the shield and SVG path, increased its usable area, and removed the translucent logo tile that made the mark appear too small.
+- Preserved the established navy, royal-blue, violet, and white palette.
+- No plugin functionality or settings behavior changed.
+
+1.1.4
+- Added the distinct SaniGlyph logo to the settings dashboard while preserving the established navy, royal-blue, and violet color scheme.
+- Added separately packaged WordPress.org icon, banner, and screenshot assets.
+- Added a separate screenshot-based user guide and release documentation so the installable plugin stays lightweight.
+- Synchronized plugin, block, readme, and asset version metadata.
+
+1.1.3
+- Fixed SVGs becoming black or losing their original appearance after upload or inline rendering.
+- Reworked sanitization into fail-closed validation: unsafe/unsupported SVGs are rejected instead of stripping parts from otherwise accepted artwork.
+- Preserved accepted SVG source exactly through the validation stage, including fills, strokes, CSS, gradients, comments, XML formatting, and exporter-specific presentation details.
+- Removed the redundant HTML-oriented KSES rewrite from the inline renderer after strict SVG validation.
+- Added common SVG root attributes used by Illustrator exports and tested the pipeline against a supplied Adobe Illustrator SVG with pixel-identical rendering.
+
+1.1.2
+- Fixed SVGs becoming blank or losing colors after upload when their appearance depended on CSS classes or inline style attributes.
+- Added safe sanitization for SVG <style> rules and style attributes using a presentation-property allowlist.
+- Preserved gradients, filters, masks, clipping paths, markers, text presentation, CSS custom properties, and local url(#id) references.
+- Continued blocking scriptable CSS, @rules/imports, data/javascript/vbscript URLs, external references, event handlers, DTDs, and entities.
+
+1.1.1
+- Prefixed all settings-page view variables and foreach variables with the unique sgsvg_ prefix to satisfy WordPress Coding Standards PrefixAllGlobals.
+- No functional behavior changed.
+
+1.1.0
+- Rebranded from the pre-release Pro SVG Manager package.
+- Replaced short global identifiers with the collision-resistant five-letter sgsvg_ / SGSVG_ prefix.
+- Rebuilt SVG sanitization with fail-closed DOM parsing and strict allowlists.
+- Added DOM-extension availability checks and a clear admin warning; uploads fail closed when DOM is unavailable.
+- Removed SVGZ support and the unsafe regex sanitizer fallback.
+- Made sanitization permanently active.
+- Hardened URL, DTD, entity, event-handler, and remote-reference handling.
+- Added defense-in-depth sanitization after optimization and at inline render time.
+- Switched to conservative optimization that preserves geometry, meaningful text spacing, and accessibility metadata.
+- Improved Media Library dimensions/previews, persisted SVG dimensions at upload time, and made administrators the secure default upload role for new installs.
+- Added a functional block.json-based Inline SVG block and changed the pre-release [inline_svg] shortcode to the collision-resistant [saniglyph_svg] tag.
+- Redesigned the settings UI and removed jQuery.
+- Removed placeholder metadata, nested Git files, rewrite flushing, and global object-cache flushing.
+- Updated version/header/readme metadata for WordPress.org submission.
+
+1.0.0
+- Initial pre-release build as Pro SVG Manager.
