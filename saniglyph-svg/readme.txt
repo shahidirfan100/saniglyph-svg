@@ -2,8 +2,8 @@
 Contributors: shahidirfan100
 Tags: svg, media, security, optimization, block
 Requires at least: 6.4
-Tested up to: 7.0
-Stable tag: 1.1.5
+Tested up to: 7.1
+Stable tag: 1.1.6
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -81,6 +81,11 @@ No. SaniGlyph SVG does not contact external services, collect telemetry, or load
 
 == Changelog ==
 
+= 1.1.6 =
+* Updated the WordPress.org `Tested up to` header to 7.1 for current-directory compatibility.
+* Synchronized plugin, block, readme, dashboard, and release-package metadata at version 1.1.6.
+* Re-audited the submission package for WordPress.org metadata, security, privacy, external-service, and packaging requirements.
+
 = 1.1.5 =
 * Reworked the dashboard logo for clear rendering at WordPress admin sizes.
 * Simplified the shield and SVG path, increased usable logo size, and removed the translucent background tile that reduced contrast.
@@ -134,6 +139,9 @@ No. SaniGlyph SVG does not contact external services, collect telemetry, or load
 * Initial pre-release build as Pro SVG Manager.
 
 == Upgrade Notice ==
+
+= 1.1.6 =
+Submission-readiness update: declares testing through WordPress 7.1 and synchronizes release metadata.
 
 = 1.1.5 =
 Dashboard branding fix: improves logo scale, contrast, and clarity without changing the plugin interface or functionality.
