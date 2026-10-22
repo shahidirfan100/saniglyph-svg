@@ -3,7 +3,7 @@ Contributors: shahidirfan100
 Tags: svg, media, security, optimization, block
 Requires at least: 6.4
 Tested up to: 7.1
-Stable tag: 1.1.8
+Stable tag: 1.1.9
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -78,11 +78,15 @@ No. SaniGlyph SVG does not contact external services, collect telemetry, or load
 
 == Changelog ==
 
+= 1.1.9 =
+
+* Expanded the safe SVG allowlist for common filter-lighting and component-transfer attributes.
+* Preserved standard CSS `font` shorthand in SVG stylesheets and presentation attributes.
+
 = 1.1.8 =
 
 * Replaced the custom settings dashboard layout with standard WordPress admin controls and typography.
 * Removed the gradient brand mark and refreshed the WordPress.org icon and banner assets with a flat, high-contrast design.
-* Updated the screenshot to show the actual settings page.
 * Added a visible error message when shortcode copying is unavailable or blocked by browser permissions.
 
 = 1.1.7 =
@@ -150,6 +154,9 @@ No. SaniGlyph SVG does not contact external services, collect telemetry, or load
 * Initial pre-release build as Pro SVG Manager.
 
 == Upgrade Notice ==
+
+= 1.1.9 =
+Improves compatibility with common SVG filter attributes and CSS font shorthand while continuing to reject unsafe content and external references.
 
 = 1.1.8 =
 Settings and directory media refresh. Existing settings and upload behavior are preserved.

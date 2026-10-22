@@ -1,9 +1,12 @@
 SaniGlyph SVG changelog
 
+1.1.9
+- Expanded the safe SVG allowlist for common filter-lighting and component-transfer attributes.
+- Preserved standard CSS font shorthand in SVG stylesheets and presentation attributes.
+
 1.1.8
 - Replaced the custom settings dashboard layout with standard WordPress admin controls and typography.
 - Removed the gradient brand mark and refreshed the WordPress.org icon and banner assets with a flat, high-contrast design.
-- Updated the screenshot to show the actual settings page.
 - Added a visible error message when shortcode copying is unavailable or blocked by browser permissions.
 
 1.1.7

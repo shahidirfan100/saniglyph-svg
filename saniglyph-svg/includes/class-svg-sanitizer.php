@@ -59,10 +59,12 @@ class SGSVG_SVG_Sanitizer {
 		'gradientunits', 'gradienttransform', 'fx', 'fy', 'fr',
 		'spreadmethod', 'patternunits', 'patterncontentunits', 'patterntransform', 'clippathunits',
 		'maskunits', 'maskcontentunits', 'markerwidth', 'markerheight', 'markerunits', 'refx', 'refy',
-		'orient', 'text-anchor', 'dominant-baseline', 'alignment-baseline', 'baseline-shift', 'font-family',
+		'orient', 'text-anchor', 'dominant-baseline', 'alignment-baseline', 'baseline-shift', 'font', 'font-family',
 		'font-size', 'font-style', 'font-weight', 'font-variant', 'font-stretch', 'letter-spacing', 'word-spacing',
 		'text-decoration', 'writing-mode', 'direction', 'textlength', 'lengthadjust', 'xml:space', 'href', 'xlink:href',
 		'in', 'in2', 'result', 'mode', 'operator', 'values', 'type', 'stddeviation', 'basefrequency',
+		'amplitude', 'azimuth', 'elevation', 'exponent', 'filterunits', 'intercept', 'limitingconeangle',
+		'pointsatx', 'pointsaty', 'pointsatz', 'primitiveunits', 'radius', 'slope', 'tablevalues', 'z',
 		'numoctaves', 'seed', 'stitchtiles', 'surfacescale', 'specularconstant', 'specularexponent',
 		'diffuseconstant', 'kernelmatrix', 'kernelunitlength', 'order', 'targetx', 'targety', 'edgemode',
 		'preservealpha', 'xchannelselector', 'ychannelselector', 'scale', 'bias', 'divisor', 'k1', 'k2', 'k3', 'k4',
@@ -84,7 +86,7 @@ class SGSVG_SVG_Sanitizer {
 		'color-interpolation-filters', 'font-family', 'font-size', 'font-style',
 		'font-weight', 'font-variant', 'font-stretch', 'letter-spacing', 'word-spacing',
 		'text-anchor', 'text-decoration', 'dominant-baseline', 'alignment-baseline',
-		'baseline-shift', 'direction', 'writing-mode', 'transform', 'transform-origin',
+		'baseline-shift', 'direction', 'writing-mode', 'transform', 'transform-origin', 'font',
 		'pointer-events', 'isolation', 'mix-blend-mode', 'enable-background',
 	);
 
