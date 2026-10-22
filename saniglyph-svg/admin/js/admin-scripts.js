@@ -10,22 +10,20 @@
 		var save = document.getElementById('sgsvg-save');
 		var status = document.getElementById('sgsvg-status');
 
-		document.querySelectorAll('.sgsvg-role input[type="checkbox"]').forEach(function (input) {
-			var sync = function () {
-				input.closest('.sgsvg-role').classList.toggle('is-active', input.checked);
-			};
-			input.addEventListener('change', sync);
-			sync();
-		});
-
 		document.querySelectorAll('[data-sgsvg-copy]').forEach(function (button) {
 			button.addEventListener('click', function () {
 				var target = document.querySelector(button.getAttribute('data-sgsvg-copy'));
-				if (!target || !navigator.clipboard) {
+				if (!target) {
+					return;
+				}
+				if (!navigator.clipboard || !navigator.clipboard.writeText) {
+					showStatus('error', sgsvgAdmin.i18n.copyError);
 					return;
 				}
 				navigator.clipboard.writeText(target.textContent).then(function () {
 					showStatus('success', sgsvgAdmin.i18n.copied);
+				}).catch(function () {
+					showStatus('error', sgsvgAdmin.i18n.copyError);
 				});
 			});
 		});
@@ -78,7 +76,9 @@
 			if (!status) {
 				return;
 			}
-			status.className = 'sgsvg-status is-visible is-' + type;
+			var noticeType = type === 'error' ? 'error' : 'success';
+			status.className = 'notice notice-' + noticeType + ' sgsvg-status is-' + type;
+			status.hidden = false;
 			status.querySelector('.sgsvg-status-text').textContent = message;
 			status.querySelector('.dashicons').className = 'dashicons ' + (type === 'success' ? 'dashicons-yes-alt' : 'dashicons-warning');
 			window.clearTimeout(showStatus.timer);
@@ -87,7 +87,8 @@
 
 		function hideStatus() {
 			if (status) {
-				status.className = 'sgsvg-status';
+				status.className = 'notice sgsvg-status';
+				status.hidden = true;
 			}
 		}
 	});

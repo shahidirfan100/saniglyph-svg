@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-labelledby="title">
+	<title id="title">SaniGlyph SVG mark</title>
+	<path fill="#17324d" d="M128 16 223 50v75c0 54-31 95-95 127-64-32-95-73-95-127V50z"/>
+	<path fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="21" d="M174 76c-14-13-31-20-51-20-30 0-52 17-52 42 0 18 13 28 42 37l30 9c22 7 32 18 32 37 0 23-22 39-53 39-25 0-45-9-60-26"/>
+</svg>

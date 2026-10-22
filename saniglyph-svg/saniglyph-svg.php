@@ -1,8 +1,8 @@
 <?php
 /**
  * Plugin Name: SaniGlyph SVG
- * Description: Secure SVG uploads with always-on sanitization, safe optimization, media previews, and optional inline rendering.
- * Version: 1.1.6
+ * Description: Fail-closed SVG validation that preserves approved artwork, with role controls, media previews, and securely escaped inline output.
+ * Version: 1.1.8
  * Requires at least: 6.4
  * Requires PHP: 7.4
  * Author: Shahid Irfan
@@ -17,7 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'SGSVG_VERSION', '1.1.6' );
+define( 'SGSVG_VERSION', '1.1.8' );
 define( 'SGSVG_PLUGIN_FILE', __FILE__ );
 define( 'SGSVG_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 define( 'SGSVG_PLUGIN_URL', plugin_dir_url( __FILE__ ) );

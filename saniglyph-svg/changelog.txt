@@ -1,5 +1,18 @@
 SaniGlyph SVG changelog
 
+1.1.8
+- Replaced the custom settings dashboard layout with standard WordPress admin controls and typography.
+- Removed the gradient brand mark and refreshed the WordPress.org icon and banner assets with a flat, high-contrast design.
+- Updated the screenshot to show the actual settings page.
+- Added a visible error message when shortcode copying is unavailable or blocked by browser permissions.
+
+1.1.7
+- Escaped shortcode and dynamic-block callback output with wp_kses() and a dedicated SVG/attachment-image allowlist.
+- Scoped SVG CSS allowlist filters to the individual render operation so other WordPress content is unaffected.
+- Preserved approved fills, strokes, gradients, filters, local fragment references, and presentation styles through output escaping.
+- Hardened CSS value validation against escape-sequence and comment-obfuscation bypasses before enabling the scoped KSES compatibility filters.
+- Documented the plugin's distinct fail-closed, multi-stage validation and visual-fidelity workflow.
+
 1.1.6
 - Updated the WordPress.org Tested up to header from 7.0 to 7.1.
 - Synchronized plugin, block, readme, dashboard, and release-package metadata at version 1.1.6.

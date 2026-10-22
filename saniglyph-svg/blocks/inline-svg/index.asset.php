@@ -11,5 +11,5 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 return array(
 	'dependencies' => array( 'wp-blocks', 'wp-element', 'wp-components', 'wp-block-editor', 'wp-i18n' ),
-	'version'      => '1.1.6',
+	'version'      => '1.1.8',
 );

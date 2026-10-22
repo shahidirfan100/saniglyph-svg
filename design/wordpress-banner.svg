@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1544" height="500" viewBox="0 0 1544 500" role="img" aria-labelledby="title description">
+	<title id="title">SaniGlyph SVG</title>
+	<desc id="description">Sanitized SVG uploads with role controls for WordPress.</desc>
+	<rect width="1544" height="500" fill="#f6f7f7"/>
+	<rect width="12" height="500" fill="#2271b1"/>
+	<g transform="translate(70 136) scale(0.9)">
+		<path fill="#17324d" d="M128 16 223 50v75c0 54-31 95-95 127-64-32-95-73-95-127V50z"/>
+		<path fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="21" d="M174 76c-14-13-31-20-51-20-30 0-52 17-52 42 0 18 13 28 42 37l30 9c22 7 32 18 32 37 0 23-22 39-53 39-25 0-45-9-60-26"/>
+	</g>
+	<rect x="356" y="104" width="2" height="292" fill="#c3c4c7"/>
+	<text x="402" y="234" fill="#17324d" font-family="Arial, sans-serif" font-size="78" font-weight="700">SaniGlyph SVG</text>
+	<text x="405" y="300" fill="#50575e" font-family="Arial, sans-serif" font-size="34">SVG uploads with sanitization and role controls.</text>
+</svg>

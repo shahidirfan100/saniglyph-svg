@@ -3,12 +3,12 @@ Contributors: shahidirfan100
 Tags: svg, media, security, optimization, block
 Requires at least: 6.4
 Tested up to: 7.1
-Stable tag: 1.1.6
+Stable tag: 1.1.8
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-Secure SVG uploads with always-on sanitization, safe optimization, Media Library previews, and optional inline rendering.
+Fail-closed SVG validation that preserves approved artwork, with role controls, Media Library previews, and securely escaped inline output.
 
 == Description ==
 
@@ -37,7 +37,11 @@ Optional attributes:
 
 `[saniglyph_svg id="123" class="site-logo" width="160" height="48"]`
 
-Inline output is validated again at render time. Valid SVG markup is returned without an additional HTML-oriented rewrite so SVG-specific presentation details remain intact.
+Inline output is validated again at render time and escaped with a dedicated SVG KSES allowlist immediately before WordPress renders it. Scoped CSS rules preserve approved fills, strokes, gradients, filters, and local fragment references without changing KSES behavior elsewhere on the site.
+
+= What makes SaniGlyph different? =
+
+SaniGlyph focuses on a narrow security-and-fidelity workflow rather than merely adding the SVG MIME type. It rejects the complete upload when unsupported active content is found instead of silently removing pieces from the artwork. Accepted files pass validation before storage, again after optional optimization, and again before inline output. Inline shortcode and block callbacks then apply WordPress KSES output escaping with SVG-specific rules scoped to that single render operation.
 
 == Installation ==
 
@@ -72,14 +76,21 @@ Uploaded SVG files behave as Media Library attachments. The `[saniglyph_svg]` sh
 
 No. SaniGlyph SVG does not contact external services, collect telemetry, or load remote JavaScript or CSS.
 
-== Screenshots ==
-
-1. Branded settings overview with the current security status and core SVG protections.
-2. Rendering and optimization controls, including optional inline SVG output.
-3. Role-based SVG upload permissions with administrators selected by default.
-4. Inline shortcode quick-use panel and save controls.
-
 == Changelog ==
+
+= 1.1.8 =
+
+* Replaced the custom settings dashboard layout with standard WordPress admin controls and typography.
+* Removed the gradient brand mark and refreshed the WordPress.org icon and banner assets with a flat, high-contrast design.
+* Updated the screenshot to show the actual settings page.
+* Added a visible error message when shortcode copying is unavailable or blocked by browser permissions.
+
+= 1.1.7 =
+* Escaped all shortcode and dynamic-block callback output with `wp_kses()` and a dedicated SVG/attachment-image allowlist.
+* Scoped SVG CSS allowlist filters to the individual render operation so other WordPress content is unaffected.
+* Preserved approved SVG fills, strokes, gradients, filters, local fragment references, and presentation styles through output escaping.
+* Hardened CSS value validation against escape-sequence and comment-obfuscation bypasses before enabling the scoped KSES compatibility filters.
+* Documented the plugin's distinct fail-closed, multi-stage validation and visual-fidelity workflow.
 
 = 1.1.6 =
 * Updated the WordPress.org `Tested up to` header to 7.1 for current-directory compatibility.
@@ -139,6 +150,12 @@ No. SaniGlyph SVG does not contact external services, collect telemetry, or load
 * Initial pre-release build as Pro SVG Manager.
 
 == Upgrade Notice ==
+
+= 1.1.8 =
+Settings and directory media refresh. Existing settings and upload behavior are preserved.
+
+= 1.1.7 =
+Review-compliance update: shortcode and dynamic-block markup now receive explicit WordPress KSES output escaping while approved SVG presentation remains supported.
 
 = 1.1.6 =
 Submission-readiness update: declares testing through WordPress 7.1 and synchronizes release metadata.

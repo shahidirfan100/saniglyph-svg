@@ -45,17 +45,28 @@ class SGSVG_SVG_Renderer {
 			'saniglyph_svg'
 		);
 
-		return $this->render_inline_svg( absint( $atts['id'] ), $atts );
+		$markup    = $this->render_inline_svg( absint( $atts['id'] ), $atts );
+		$sanitizer = SGSVG_SVG_Sanitizer::get_instance();
+
+		$this->add_svg_kses_filters( $sanitizer );
+		try {
+			return wp_kses( $markup, $this->get_output_kses_rules( $sanitizer ) );
+		} finally {
+			$this->remove_svg_kses_filters( $sanitizer );
+		}
 	}
 
 	/**
-	 * Render a sanitized SVG attachment inline, or fall back to a normal image.
+	 * Build validated SVG attachment markup, or fall back to a normal image.
+	 *
+	 * Registered callbacks must pass this internal markup through wp_kses()
+	 * immediately before returning it to WordPress.
 	 *
 	 * @param int   $attachment_id Attachment ID.
 	 * @param array $args          Render arguments.
 	 * @return string
 	 */
-	public function render_inline_svg( $attachment_id, $args = array() ) {
+	private function render_inline_svg( $attachment_id, $args = array() ) {
 		if ( ! $attachment_id ) {
 			return '';
 		}
@@ -81,30 +92,23 @@ class SGSVG_SVG_Renderer {
 			return '';
 		}
 
-		$class = isset( $args['className'] ) ? $args['className'] : ( isset( $args['class'] ) ? $args['class'] : '' );
-		$class = $this->sanitize_classes( $class );
-		$width = isset( $args['width'] ) ? $this->sanitize_dimension( $args['width'] ) : '';
+		$class  = isset( $args['className'] ) ? $args['className'] : ( isset( $args['class'] ) ? $args['class'] : '' );
+		$class  = $this->sanitize_classes( $class );
+		$width  = isset( $args['width'] ) ? $this->sanitize_dimension( $args['width'] ) : '';
 		$height = isset( $args['height'] ) ? $this->sanitize_dimension( $args['height'] ) : '';
 
-		// Preserve the validated SVG exactly when no presentation override was
-		// requested. Running valid SVG through HTML-oriented KSES can normalize or
-		// remove SVG-specific presentation details and make artwork render black.
-		if ( '' === $class && '' === $width && '' === $height ) {
-			return $content;
+		if ( '' !== $class || '' !== $width || '' !== $height ) {
+			$content = $this->apply_root_attributes( $content, $class, $width, $height );
+			if ( false === $content ) {
+				return '';
+			}
+
+			// Validate again after the DOM mutation before output escaping.
+			$content = $sanitizer->sanitize( $content );
 		}
 
-		$content = $this->apply_root_attributes( $content, $class, $width, $height );
-		if ( false === $content ) {
-			return '';
-		}
-
-		// apply_root_attributes() uses the same DOM parser after the source has
-		// already passed the strict SVG validator. Validate once more after mutation
-		// and return only if the resulting SVG still satisfies the security rules.
-		$content = $sanitizer->sanitize( $content );
 		return false === $content ? '' : $content;
 	}
-
 
 	/**
 	 * Safely apply presentation attributes to the SVG root without creating
@@ -176,7 +180,61 @@ class SGSVG_SVG_Renderer {
 	 */
 	public function render_svg_block( $attributes ) {
 		$attachment_id = isset( $attributes['attachmentId'] ) ? absint( $attributes['attachmentId'] ) : 0;
-		return $this->render_inline_svg( $attachment_id, $attributes );
+		$markup        = $this->render_inline_svg( $attachment_id, $attributes );
+		$sanitizer     = SGSVG_SVG_Sanitizer::get_instance();
+
+		$this->add_svg_kses_filters( $sanitizer );
+		try {
+			return wp_kses( $markup, $this->get_output_kses_rules( $sanitizer ) );
+		} finally {
+			$this->remove_svg_kses_filters( $sanitizer );
+		}
+	}
+
+	/**
+	 * Return the KSES allowlist for validated SVG and its image fallback.
+	 *
+	 * @param SGSVG_SVG_Sanitizer $sanitizer SVG sanitizer.
+	 * @return array<string,array<string,bool>>
+	 */
+	private function get_output_kses_rules( $sanitizer ) {
+		$rules        = $sanitizer->get_kses_rules();
+		$rules['img'] = array(
+			'alt'           => true,
+			'class'         => true,
+			'decoding'      => true,
+			'fetchpriority' => true,
+			'height'        => true,
+			'loading'       => true,
+			'sizes'         => true,
+			'src'           => true,
+			'srcset'        => true,
+			'width'         => true,
+		);
+
+		return $rules;
+	}
+
+	/**
+	 * Add SVG CSS rules only while registered callback output is escaped.
+	 *
+	 * @param SGSVG_SVG_Sanitizer $sanitizer SVG sanitizer.
+	 * @return void
+	 */
+	private function add_svg_kses_filters( $sanitizer ) {
+		add_filter( 'safe_style_css', array( $sanitizer, 'filter_safe_style_css' ) );
+		add_filter( 'safecss_filter_attr_allow_css', array( $sanitizer, 'filter_kses_allow_svg_css' ), 10, 2 );
+	}
+
+	/**
+	 * Remove the scoped SVG CSS rules immediately after output escaping.
+	 *
+	 * @param SGSVG_SVG_Sanitizer $sanitizer SVG sanitizer.
+	 * @return void
+	 */
+	private function remove_svg_kses_filters( $sanitizer ) {
+		remove_filter( 'safe_style_css', array( $sanitizer, 'filter_safe_style_css' ) );
+		remove_filter( 'safecss_filter_attr_allow_css', array( $sanitizer, 'filter_kses_allow_svg_css' ), 10 );
 	}
 
 	/**

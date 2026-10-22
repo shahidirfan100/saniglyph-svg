@@ -102,9 +102,10 @@ class SGSVG_Admin_Settings {
 				'ajaxUrl' => admin_url( 'admin-ajax.php' ),
 				'nonce'   => wp_create_nonce( 'sgsvg_save_settings' ),
 				'i18n'    => array(
-					'saved'  => __( 'Settings saved.', 'saniglyph-svg' ),
-					'error'  => __( 'Settings could not be saved. Please try again.', 'saniglyph-svg' ),
-					'copied' => __( 'Shortcode copied.', 'saniglyph-svg' ),
+					'saved'     => __( 'Settings saved.', 'saniglyph-svg' ),
+					'error'     => __( 'Settings could not be saved. Please try again.', 'saniglyph-svg' ),
+					'copied'    => __( 'Shortcode copied.', 'saniglyph-svg' ),
+					'copyError' => __( 'Could not copy the shortcode. Check your browser clipboard permissions.', 'saniglyph-svg' ),
 				),
 			)
 		);
