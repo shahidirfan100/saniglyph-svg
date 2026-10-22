@@ -76,6 +76,10 @@ Uploaded SVG files behave as Media Library attachments. The `[saniglyph_svg]` sh
 
 No. SaniGlyph SVG does not contact external services, collect telemetry, or load remote JavaScript or CSS.
 
+== Screenshots ==
+
+1. The SaniGlyph SVG settings page in WordPress, with always-on sanitization, upload role controls, optimization, and inline rendering settings.
+
 == Changelog ==
 
 = 1.1.9 =
